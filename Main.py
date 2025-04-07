@@ -9,6 +9,7 @@ from keep_alive import keep_alive
 TOKEN = "7214940614:AAGGxZGvXmP9iCkyReML9QjhrKaBlY7Bp60"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+TOKEN = os.getenv("BOT_TOKEN")
 
 def download_video(url):
     output_path = "downloads/%(title)s.%(ext)s"
