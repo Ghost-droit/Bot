@@ -11,6 +11,8 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 TOKEN = os.getenv("BOT_TOKEN")
 
+TOKEN = os.getenv("TOKEN")
+
 def download_video(url):
     output_path = "downloads/%(title)s.%(ext)s"
     os.makedirs("downloads", exist_ok=True)
