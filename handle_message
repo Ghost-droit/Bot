@@ -1,0 +1,22 @@
+import re
+
+@dp.message()
+async def handle_message(message: Message):
+    text = message.text.strip()
+
+    # Extract first valid URL using regex
+    url_match = re.search(r'(https?://[^\s]+)', text)
+    if url_match:
+        url = url_match.group(0)
+        if any(site in url for site in ["youtube.com", "youtu.be", "tiktok.com", "instagram.com", "pinterest.com"]):
+            await message.reply("📥 Downloading your video, please wait...")
+            try:
+                video_path = download_video(url)
+                await message.answer_document(types.FSInputFile(video_path))
+                os.remove(video_path)
+            except Exception as e:
+                await message.reply(f"❌ Error: {str(e)}")
+        else:
+            await message.reply("❌ Invalid link. Please send a valid video URL.")
+    else:
+        await message.reply("❌ Please send a valid video URL.")
